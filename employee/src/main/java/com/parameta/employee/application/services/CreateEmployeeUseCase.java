@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.parameta.employee.application.dto.CreateEmployeeRequest;
 import com.parameta.employee.application.mapper.EmployeeMapper;
 import com.parameta.employee.application.ports.in.CreateEmployeeService;
-import com.parameta.employee.application.ports.out.EmployeeSoapPersistencePort;
+import com.parameta.employee.application.ports.outbound.EmployeeSoapPersistencePort;
 import com.parameta.employee.domain.services.EmployeeCreationService;
 import com.parameta.employee.presentation.response.CreateEmployeeResponse;
 import com.parameta.employee.presentation.response.PeriodInfo;

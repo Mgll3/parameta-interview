@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import com.parameta.employee.application.dto.CreateEmployeeRequest;
 import com.parameta.employee.application.mapper.EmployeeMapper;
-import com.parameta.employee.application.ports.out.EmployeeSoapPersistencePort;
+import com.parameta.employee.application.ports.outbound.EmployeeSoapPersistencePort;
 import com.parameta.employee.domain.entity.Employee;
 import com.parameta.employee.shared.exception.SoapFaultClientException;
 import com.parameta.employee.shared.utils.Constants;
