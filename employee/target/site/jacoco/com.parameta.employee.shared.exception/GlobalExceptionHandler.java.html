@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GlobalExceptionHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">employee</a> &gt; <a href="index.source.html" class="el_package">com.parameta.employee.shared.exception</a> &gt; <span class="el_source">GlobalExceptionHandler.java</span></div><h1>GlobalExceptionHandler.java</h1><pre class="source lang-java linenums">package com.parameta.employee.shared.exception;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.support.WebExchangeBindException;
+
+import com.parameta.employee.shared.utils.Constants;
+
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+
+@RestControllerAdvice
+<span class="fc" id="L22">@Slf4j</span>
+<span class="fc" id="L23">public class GlobalExceptionHandler {</span>
+
+    private ResponseEntity&lt;ErrorResponse&gt; handleExceptionDRY(Exception e, String errorCode, HttpStatus status) {
+<span class="fc" id="L26">        log.error(e.getMessage(), e);</span>
+<span class="fc" id="L27">        ErrorResponse errorResponse = new ErrorResponse(errorCode, e.getMessage());</span>
+<span class="fc" id="L28">        return new ResponseEntity&lt;&gt;(errorResponse, status);</span>
+    }
+
+    @ExceptionHandler(SoapFaultClientException.class)
+    public ResponseEntity&lt;ErrorResponse&gt; handleSoapFaultClientException(SoapFaultClientException e) {
+<span class="nc" id="L33">        log.error(e.getMessage(), e);</span>
+<span class="nc" id="L34">        return handleExceptionDRY(e, Constants.ERROR_SOAP_FAULT_CLIENT, HttpStatus.BAD_GATEWAY);</span>
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleValidationExceptions(MethodArgumentNotValidException ex) {
+<span class="nc" id="L39">        log.error(Constants.LOG_VALIDATION_ERROR, ex.getMessage());</span>
+<span class="nc" id="L40">        Map&lt;String, String&gt; errors = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L41">        ex.getBindingResult().getAllErrors().forEach(error -&gt; {</span>
+<span class="nc" id="L42">            String fieldName = ((FieldError) error).getField();</span>
+<span class="nc" id="L43">            String errorMessage = error.getDefaultMessage();</span>
+<span class="nc" id="L44">            errors.put(fieldName, errorMessage);</span>
+<span class="nc" id="L45">        });</span>
+<span class="nc" id="L46">        return ResponseEntity.badRequest().body(errors);</span>
+    }
+
+    @ExceptionHandler(WebExchangeBindException.class)
+    public ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleWebExchangeBindException(WebExchangeBindException ex) {
+<span class="fc" id="L51">        log.error(Constants.LOG_WEB_EXCHANGE_BIND_EXCEPTION, ex.getMessage());</span>
+<span class="fc" id="L52">        Map&lt;String, String&gt; errors = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L53">        ex.getFieldErrors().forEach(error -&gt; {</span>
+<span class="fc" id="L54">            String fieldName = error.getField();</span>
+<span class="fc" id="L55">            String errorMessage = error.getDefaultMessage();</span>
+<span class="fc" id="L56">            errors.put(fieldName, errorMessage);</span>
+<span class="fc" id="L57">        });</span>
+<span class="fc" id="L58">        return ResponseEntity.badRequest().body(errors);</span>
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity&lt;ErrorResponse&gt; handleIllegalArgumentException(IllegalArgumentException e) {
+<span class="fc" id="L63">        log.error(e.getMessage(), e);</span>
+<span class="fc" id="L64">        return handleExceptionDRY(e, Constants.ERROR_INVALID_ARGUMENT, HttpStatus.BAD_REQUEST);</span>
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity&lt;ErrorResponse&gt; handleGeneralException(Exception e) {
+<span class="nc" id="L69">        log.error(e.getMessage(), e);</span>
+<span class="nc" id="L70">        return handleExceptionDRY(e, Constants.ERROR_INTERNAL_SERVER, HttpStatus.INTERNAL_SERVER_ERROR);</span>
+    }
+
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public class ErrorResponse {
+        private String errorCode;
+        private String message;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

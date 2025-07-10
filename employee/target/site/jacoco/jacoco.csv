@@ -1,0 +1,14 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+employee,com.parameta.employee.infraestructure.soap,EmployeeSoapClientAdapter,5,22,2,2,1,4,2,1,0,1
+employee,com.parameta.employee.presentation.controller,CreateEmployeeController,0,38,0,0,0,14,0,5,0,5
+employee,com.parameta.employee.domain.services,EmployeeCreationService,0,30,0,2,0,6,0,4,0,3
+employee,com.parameta.employee.infraestructure.soap.client,SaveEmployeeRequest,24,35,0,0,8,17,8,9,8,9
+employee,com.parameta.employee.infraestructure.soap.client,ObjectFactory,11,0,0,0,4,0,3,0,3,0
+employee,com.parameta.employee.infraestructure.soap.client,SaveEmployeeResponse,36,30,0,0,18,10,9,10,9,10
+employee,com.parameta.employee.shared.exception,SoapFaultClientException,4,0,0,0,2,0,1,0,1,0
+employee,com.parameta.employee.shared.exception,GlobalExceptionHandler,54,67,0,0,12,15,4,6,4,6
+employee,com.parameta.employee.presentation.response,PeriodInfo,0,14,0,0,0,2,0,1,0,1
+employee,com.parameta.employee.infraestructure.soap.config,SoapClientConfig,0,29,0,0,0,8,0,3,0,3
+employee,com.parameta.employee,EmployeeApplication,5,3,0,0,2,1,1,1,1,1
+employee,com.parameta.employee.application.services,CreateEmployeeUseCase,0,86,0,0,0,15,0,9,0,9
+employee,com.parameta.employee.application.mapper,EmployeeMapper,3,106,3,3,0,31,3,4,0,4

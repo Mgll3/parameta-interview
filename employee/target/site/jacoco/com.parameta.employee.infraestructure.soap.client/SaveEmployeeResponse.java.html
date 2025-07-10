@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SaveEmployeeResponse.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">employee</a> &gt; <a href="index.source.html" class="el_package">com.parameta.employee.infraestructure.soap.client</a> &gt; <span class="el_source">SaveEmployeeResponse.java</span></div><h1>SaveEmployeeResponse.java</h1><pre class="source lang-java linenums">//
+// Este archivo ha sido generado por Eclipse Implementation of JAXB v3.0.0 
+// Visite https://eclipse-ee4j.github.io/jaxb-ri 
+// Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
+// Generado el: 2025.07.10 a las 11:32:09 AM COT 
+//
+
+
+package com.parameta.employee.infraestructure.soap.client;
+
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+
+
+/**
+ * &lt;p&gt;Clase Java para anonymous complex type.
+ * 
+ * &lt;p&gt;El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * 
+ * &lt;pre&gt;
+ * &amp;lt;complexType&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base=&quot;{http://www.w3.org/2001/XMLSchema}anyType&quot;&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name=&quot;id&quot; type=&quot;{http://www.w3.org/2001/XMLSchema}string&quot;/&amp;gt;
+ *         &amp;lt;element name=&quot;firstName&quot; type=&quot;{http://www.w3.org/2001/XMLSchema}string&quot;/&amp;gt;
+ *         &amp;lt;element name=&quot;lastName&quot; type=&quot;{http://www.w3.org/2001/XMLSchema}string&quot;/&amp;gt;
+ *         &amp;lt;element name=&quot;documentType&quot; type=&quot;{http://www.w3.org/2001/XMLSchema}string&quot;/&amp;gt;
+ *         &amp;lt;element name=&quot;documentNumber&quot; type=&quot;{http://www.w3.org/2001/XMLSchema}string&quot;/&amp;gt;
+ *         &amp;lt;element name=&quot;birthDate&quot; type=&quot;{http://www.w3.org/2001/XMLSchema}string&quot;/&amp;gt;
+ *         &amp;lt;element name=&quot;joinDate&quot; type=&quot;{http://www.w3.org/2001/XMLSchema}string&quot;/&amp;gt;
+ *         &amp;lt;element name=&quot;position&quot; type=&quot;{http://www.w3.org/2001/XMLSchema}string&quot;/&amp;gt;
+ *         &amp;lt;element name=&quot;salary&quot; type=&quot;{http://www.w3.org/2001/XMLSchema}double&quot;/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = &quot;&quot;, propOrder = {
+    &quot;id&quot;,
+    &quot;firstName&quot;,
+    &quot;lastName&quot;,
+    &quot;documentType&quot;,
+    &quot;documentNumber&quot;,
+    &quot;birthDate&quot;,
+    &quot;joinDate&quot;,
+    &quot;position&quot;,
+    &quot;salary&quot;
+})
+@XmlRootElement(name = &quot;SaveEmployeeResponse&quot;)
+<span class="fc" id="L58">public class SaveEmployeeResponse {</span>
+
+    @XmlElement(required = true)
+    protected String id;
+    @XmlElement(required = true)
+    protected String firstName;
+    @XmlElement(required = true)
+    protected String lastName;
+    @XmlElement(required = true)
+    protected String documentType;
+    @XmlElement(required = true)
+    protected String documentNumber;
+    @XmlElement(required = true)
+    protected String birthDate;
+    @XmlElement(required = true)
+    protected String joinDate;
+    @XmlElement(required = true)
+    protected String position;
+    protected double salary;
+
+    /**
+     * Obtiene el valor de la propiedad id.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getId() {
+<span class="fc" id="L87">        return id;</span>
+    }
+
+    /**
+     * Define el valor de la propiedad id.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setId(String value) {
+<span class="nc" id="L99">        this.id = value;</span>
+<span class="nc" id="L100">    }</span>
+
+    /**
+     * Obtiene el valor de la propiedad firstName.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getFirstName() {
+<span class="fc" id="L111">        return firstName;</span>
+    }
+
+    /**
+     * Define el valor de la propiedad firstName.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFirstName(String value) {
+<span class="nc" id="L123">        this.firstName = value;</span>
+<span class="nc" id="L124">    }</span>
+
+    /**
+     * Obtiene el valor de la propiedad lastName.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLastName() {
+<span class="fc" id="L135">        return lastName;</span>
+    }
+
+    /**
+     * Define el valor de la propiedad lastName.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLastName(String value) {
+<span class="nc" id="L147">        this.lastName = value;</span>
+<span class="nc" id="L148">    }</span>
+
+    /**
+     * Obtiene el valor de la propiedad documentType.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDocumentType() {
+<span class="fc" id="L159">        return documentType;</span>
+    }
+
+    /**
+     * Define el valor de la propiedad documentType.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDocumentType(String value) {
+<span class="nc" id="L171">        this.documentType = value;</span>
+<span class="nc" id="L172">    }</span>
+
+    /**
+     * Obtiene el valor de la propiedad documentNumber.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDocumentNumber() {
+<span class="fc" id="L183">        return documentNumber;</span>
+    }
+
+    /**
+     * Define el valor de la propiedad documentNumber.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDocumentNumber(String value) {
+<span class="nc" id="L195">        this.documentNumber = value;</span>
+<span class="nc" id="L196">    }</span>
+
+    /**
+     * Obtiene el valor de la propiedad birthDate.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getBirthDate() {
+<span class="fc" id="L207">        return birthDate;</span>
+    }
+
+    /**
+     * Define el valor de la propiedad birthDate.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBirthDate(String value) {
+<span class="nc" id="L219">        this.birthDate = value;</span>
+<span class="nc" id="L220">    }</span>
+
+    /**
+     * Obtiene el valor de la propiedad joinDate.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getJoinDate() {
+<span class="fc" id="L231">        return joinDate;</span>
+    }
+
+    /**
+     * Define el valor de la propiedad joinDate.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setJoinDate(String value) {
+<span class="nc" id="L243">        this.joinDate = value;</span>
+<span class="nc" id="L244">    }</span>
+
+    /**
+     * Obtiene el valor de la propiedad position.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPosition() {
+<span class="fc" id="L255">        return position;</span>
+    }
+
+    /**
+     * Define el valor de la propiedad position.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPosition(String value) {
+<span class="nc" id="L267">        this.position = value;</span>
+<span class="nc" id="L268">    }</span>
+
+    /**
+     * Obtiene el valor de la propiedad salary.
+     * 
+     */
+    public double getSalary() {
+<span class="fc" id="L275">        return salary;</span>
+    }
+
+    /**
+     * Define el valor de la propiedad salary.
+     * 
+     */
+    public void setSalary(double value) {
+<span class="nc" id="L283">        this.salary = value;</span>
+<span class="nc" id="L284">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

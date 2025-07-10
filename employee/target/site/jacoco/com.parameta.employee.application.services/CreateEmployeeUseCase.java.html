@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreateEmployeeUseCase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">employee</a> &gt; <a href="index.source.html" class="el_package">com.parameta.employee.application.services</a> &gt; <span class="el_source">CreateEmployeeUseCase.java</span></div><h1>CreateEmployeeUseCase.java</h1><pre class="source lang-java linenums">package com.parameta.employee.application.services;
+
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.parameta.employee.application.dto.CreateEmployeeRequest;
+import com.parameta.employee.application.mapper.EmployeeMapper;
+import com.parameta.employee.application.ports.in.CreateEmployeeService;
+import com.parameta.employee.application.ports.outbound.EmployeeSoapPersistencePort;
+import com.parameta.employee.domain.services.EmployeeCreationService;
+import com.parameta.employee.presentation.response.CreateEmployeeResponse;
+import com.parameta.employee.presentation.response.PeriodInfo;
+
+import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
+
+@Service
+@RequiredArgsConstructor
+public class CreateEmployeeUseCase implements CreateEmployeeService {
+
+    @Autowired
+    private final EmployeeSoapPersistencePort employeeSoapClient;
+    @Autowired
+    private final EmployeeMapper employeeMapper;
+    @Autowired
+    private final EmployeeCreationService employeeCreationService;
+
+    public Mono&lt;CreateEmployeeResponse&gt; execute(Mono&lt;CreateEmployeeRequest&gt; request) {
+
+<span class="fc" id="L34">        return employeeCreationService.validateCreation(request)</span>
+<span class="fc" id="L35">                .flatMap(validRequest -&gt; Mono.fromCallable(() -&gt; employeeSoapClient.saveEmployee(validRequest))</span>
+<span class="fc" id="L36">                        .subscribeOn(Schedulers.boundedElastic())) // Don't block the main thread</span>
+<span class="fc" id="L37">                .map(savedEmployee -&gt; {</span>
+<span class="fc" id="L38">                    PeriodInfo age = PeriodInfo.from(savedEmployee.getBirthDate(), LocalDate.now());</span>
+<span class="fc" id="L39">                    PeriodInfo tenure = PeriodInfo.from(savedEmployee.getJoinDate(), LocalDate.now());</span>
+<span class="fc" id="L40">                    return employeeMapper.toCreateEmployeeResponse(savedEmployee, age, tenure);</span>
+                });
+    }
+
+    public Flux&lt;CreateEmployeeResponse&gt; executeBulk(Flux&lt;CreateEmployeeRequest&gt; requests) {
+<span class="fc" id="L45">        return requests</span>
+<span class="fc" id="L46">                .flatMap(request -&gt; employeeCreationService.validateCreation(Mono.just(request))</span>
+<span class="fc" id="L47">                        .flatMap(validRequest -&gt; Mono.fromCallable(() -&gt; employeeSoapClient.saveEmployee(validRequest))</span>
+<span class="fc" id="L48">                                .subscribeOn(Schedulers.boundedElastic()))</span>
+<span class="fc" id="L49">                        .map(savedEmployee -&gt; {</span>
+<span class="fc" id="L50">                            PeriodInfo age = PeriodInfo.from(savedEmployee.getBirthDate(), LocalDate.now());</span>
+<span class="fc" id="L51">                            PeriodInfo tenure = PeriodInfo.from(savedEmployee.getJoinDate(), LocalDate.now());</span>
+<span class="fc" id="L52">                            return employeeMapper.toCreateEmployeeResponse(savedEmployee, age, tenure);</span>
+                        }));
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

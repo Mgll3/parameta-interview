@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmployeeSoapClientAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">employee</a> &gt; <a href="index.source.html" class="el_package">com.parameta.employee.infraestructure.soap</a> &gt; <span class="el_source">EmployeeSoapClientAdapter.java</span></div><h1>EmployeeSoapClientAdapter.java</h1><pre class="source lang-java linenums">package com.parameta.employee.infraestructure.soap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.ws.client.core.WebServiceTemplate;
+import com.parameta.employee.application.dto.CreateEmployeeRequest;
+import com.parameta.employee.application.mapper.EmployeeMapper;
+import com.parameta.employee.application.ports.outbound.EmployeeSoapPersistencePort;
+import com.parameta.employee.domain.entity.Employee;
+import com.parameta.employee.shared.exception.SoapFaultClientException;
+import com.parameta.employee.shared.utils.Constants;
+import lombok.AllArgsConstructor;
+import com.parameta.employee.infraestructure.soap.client.SaveEmployeeRequest;
+import com.parameta.employee.infraestructure.soap.client.SaveEmployeeResponse;
+
+@Component
+@AllArgsConstructor
+public class EmployeeSoapClientAdapter implements EmployeeSoapPersistencePort {
+
+    private static final String SOAP_URI = Constants.SOAP_EMPLOYEE_SERVICE_URL;
+    @Autowired
+    private final EmployeeMapper employeeMapper;
+    @Autowired
+    private WebServiceTemplate webServiceTemplate;
+
+    @Override
+    public Employee saveEmployee(CreateEmployeeRequest employee) {
+
+<span class="fc" id="L29">        SaveEmployeeRequest employeeToSave = employeeMapper.toEmployeeSoap(employee);</span>
+<span class="fc" id="L30">        SaveEmployeeResponse savedEmployee = (SaveEmployeeResponse) webServiceTemplate.marshalSendAndReceive(SOAP_URI,</span>
+                employeeToSave);
+<span class="pc bpc" id="L32" title="2 of 4 branches missed.">        if (savedEmployee == null || savedEmployee.getId() == null) {</span>
+<span class="nc" id="L33">            throw new SoapFaultClientException(Constants.SOAP_INVALID_RESPONSE);</span>
+        }
+<span class="fc" id="L35">        return employeeMapper.toEmployee(savedEmployee);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
